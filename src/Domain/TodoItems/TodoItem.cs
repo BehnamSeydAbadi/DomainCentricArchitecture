@@ -2,7 +2,7 @@
 {
     public sealed class TodoItem
     {
-        public static int MaximumTitleLength = 512;
+        public static int MaximumTitleLength => 512;
 
         public TodoItem(string title)
         {
