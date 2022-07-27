@@ -51,5 +51,18 @@ namespace Domain.UnitTest.TodoItems
 
             action.Should().Throw<TitleNullOrEmptyException>();
         }
+
+        [Test]
+        public void TodoItemTitleShouldNotBeMoreThanMaximumLengthLimit()
+        {
+            var invalidTitle = TodoItemTitle;
+
+            for (int i = 0; i < TodoItem.MaximumTitleLength; i++)
+                invalidTitle += "*";
+
+            var action = () => new TodoItem(invalidTitle);
+
+            action.Should().Throw<InvalidTitleLengthException>();
+        }
     }
 }

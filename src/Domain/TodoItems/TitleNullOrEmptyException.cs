@@ -2,6 +2,6 @@
 {
     public class TitleNullOrEmptyException : Exception
     {
-        public TitleNullOrEmptyException(string message) : base(message) { }
+        public TitleNullOrEmptyException() : base("Title is null or empty.") { }
     }
 }

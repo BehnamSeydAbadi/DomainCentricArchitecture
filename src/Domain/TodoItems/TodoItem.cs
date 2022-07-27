@@ -2,11 +2,15 @@
 {
     public sealed class TodoItem
     {
+        public static int MaximumTitleLength = 512;
+
         public TodoItem(string title)
         {
             if (string.IsNullOrWhiteSpace(title))
-                throw new TitleNullOrEmptyException(nameof(title));
+                throw new TitleNullOrEmptyException();
 
+            if (title.Length > 512)
+                throw new InvalidTitleLengthException();
 
             Title = title;
         }
