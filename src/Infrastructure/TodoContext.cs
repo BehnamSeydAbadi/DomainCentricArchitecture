@@ -1,9 +1,9 @@
 ﻿using Application.Interfaces;
 using Domain.TodoItems;
+using Infrastructure.TodoItems;
 using Microsoft.EntityFrameworkCore;
-using Persistance.TodoItems;
 
-namespace Persistance
+namespace Infrastructure
 {
     public class TodoContext : DbContext, ITodoContext
     {

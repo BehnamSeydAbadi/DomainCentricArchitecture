@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{59FB1C3A-9CFD-4807-96C9-4C0F8714AD76}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistance", "Persistance\Persistance.csproj", "{1E64811D-7C3B-4536-9A4A-83210E72B7A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Persistance\Infrastructure.csproj", "{1E64811D-7C3B-4536-9A4A-83210E72B7A6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{43784AF8-F44B-4CBE-8ADF-9F5BA36B8B4B}"
 EndProject
