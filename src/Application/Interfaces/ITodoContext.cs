@@ -5,6 +5,6 @@ namespace Application.Interfaces
 {
     public interface ITodoContext
     {
-        DbSet<TodoItem> Customers { get; set; }
+        DbSet<TodoItem> TodoItem { get; set; }
     }
 }
