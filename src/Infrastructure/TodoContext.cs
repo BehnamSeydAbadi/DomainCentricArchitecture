@@ -17,6 +17,6 @@ namespace Infrastructure
             optionsBuilder.UseSqlServer(@"Server=.;Database=TodoDb;Trusted_Connection=True;");
         }
 
-        public DbSet<TodoItem> TodoItem { get; set; }
+        public DbSet<TodoItem> TodoItems { get; set; }
     }
 }
