@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="TodoItems\" />
+    <Folder Include="TodoItems\Queries\" />
   </ItemGroup>
 
 </Project>
