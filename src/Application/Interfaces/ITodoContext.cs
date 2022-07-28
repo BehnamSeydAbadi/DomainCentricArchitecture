@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Interfaces
 {
-    public interface IDatabaseService
+    public interface ITodoContext
     {
         DbSet<TodoItem> Customers { get; set; }
     }
