@@ -1,6 +1,8 @@
-﻿namespace Domain.TodoItems
+﻿using Domain.Common;
+
+namespace Domain.TodoItems
 {
-    public sealed class TodoItem
+    public sealed class TodoItem : Entity
     {
         public static int MaximumTitleLength => 512;
 
