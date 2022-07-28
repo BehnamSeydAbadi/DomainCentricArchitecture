@@ -12,7 +12,7 @@ using Persistance;
 namespace Persistance.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    [Migration("20220728200802_InitDb")]
+    [Migration("20220728203053_InitDb")]
     partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

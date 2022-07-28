@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Domain.TodoItems;
 using Microsoft.EntityFrameworkCore;
+using Persistance.TodoItems;
 
 namespace Persistance
 {
@@ -8,10 +9,7 @@ namespace Persistance
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TodoItem>().HasKey(t => t.Id);
-            modelBuilder.Entity<TodoItem>().Property(t => t.DoneDate).IsRequired(false);
-            modelBuilder.Entity<TodoItem>().Property(t => t.DueDate).IsRequired(false);
-            modelBuilder.Entity<TodoItem>().Property(t => t.Title).HasMaxLength(Domain.TodoItems.TodoItem.MaximumTitleLength);
+            modelBuilder.ApplyConfiguration(TodoItemConfiguration.Config);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
