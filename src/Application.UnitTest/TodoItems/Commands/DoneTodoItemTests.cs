@@ -30,5 +30,13 @@ namespace Application.UnitTest.TodoItems.Commands
             //Arange
             todoItem.DoneDate.Should().NotBeNull().And.Be(DateTime.Now.Date);
         }
+
+        [Test]
+        public async Task ThrowExceptionWhenTodoItemNotFoundAsync()
+        {
+            var action = () => _commandHandler.HandleAsync(new DoneTodoItemCommand(0));
+
+            await action.Should().ThrowAsync<TodoItemNotFoundException>();
+        }
     }
 }
