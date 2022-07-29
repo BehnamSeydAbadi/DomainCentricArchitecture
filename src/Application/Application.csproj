@@ -15,8 +15,4 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="TodoItems\Queries\" />
-  </ItemGroup>
-
 </Project>
