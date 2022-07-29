@@ -13,6 +13,8 @@ namespace Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
             => modelBuilder.ApplyConfiguration(TodoItemConfiguration.Config);
 
+        public async Task SaveChangesAsync() => await base.SaveChangesAsync();
+
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    optionsBuilder.UseSqlServer(@"Server=.;Database=TodoDb;Trusted_Connection=True;");
