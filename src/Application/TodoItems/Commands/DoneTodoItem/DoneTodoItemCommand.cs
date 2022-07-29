@@ -1,6 +1,6 @@
 ﻿using Application.Common;
 
-namespace Application.TodoItems.Commands
+namespace Application.TodoItems.Commands.DoneTodoItem
 {
     public sealed class DoneTodoItemCommand : ICommand
     {

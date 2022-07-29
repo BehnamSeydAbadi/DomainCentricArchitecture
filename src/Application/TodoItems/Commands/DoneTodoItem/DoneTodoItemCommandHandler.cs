@@ -1,8 +1,9 @@
 ﻿using Application.Common;
 using Application.Interfaces;
+using Application.TodoItems.Commands.Common;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.TodoItems.Commands
+namespace Application.TodoItems.Commands.DoneTodoItem
 {
     public class DoneTodoItemCommandHandler : ICommandHandler<DoneTodoItemCommand>
     {

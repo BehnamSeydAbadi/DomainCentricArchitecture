@@ -1,4 +1,4 @@
-﻿namespace Application.TodoItems.Commands
+﻿namespace Application.TodoItems.Commands.Common
 {
     public class TodoItemNotFoundException : Exception
     {

@@ -1,4 +1,5 @@
-﻿using Application.TodoItems.Commands;
+﻿using Application.TodoItems.Commands.Common;
+using Application.TodoItems.Commands.DoneTodoItem;
 using Application.UnitTest.Common;
 using Domain.TodoItems;
 using FluentAssertions;
