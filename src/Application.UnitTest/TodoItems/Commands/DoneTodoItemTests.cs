@@ -1,6 +1,9 @@
-﻿namespace Application.UnitTest.TodoItems.Commands
+﻿using Application.UnitTest.Common;
+
+namespace Application.UnitTest.TodoItems.Commands
 {
-    internal class DoneTodoItemTests
+    public class DoneTodoItemTests : BaseTest
     {
+
     }
 }

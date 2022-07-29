@@ -1,30 +1,17 @@
 ﻿using Application.TodoItems.Queries;
+using Application.UnitTest.Common;
 using Domain.TodoItems;
-using Faker;
 using FluentAssertions;
-using Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
 namespace Application.UnitTest.TodoItems.Queries
 {
-    public class GetTodayTodoItemsTests
+    public class GetTodayTodoItemsTests : BaseTest
     {
         private GetTodayTodoItemsQueryHandler _queryHandler;
-        private TodoContext _todoContext;
-
-        private string RandomTodoItemTitle => Name.FullName(NameFormats.WithPrefix);
-
 
         [SetUp]
-        public void Setup()
-        {
-            var todoContext = GetTodoContext();
-
-            _queryHandler = new GetTodayTodoItemsQueryHandler(todoContext);
-
-            _todoContext = todoContext;
-        }
+        public void Setup() => _queryHandler = new GetTodayTodoItemsQueryHandler(_todoContext);
 
         [Test]
         public async Task GetTodayTodoItemsSuccessfullyAsync()
@@ -41,16 +28,6 @@ namespace Application.UnitTest.TodoItems.Queries
 
             //Assert
             todayTodoItems.Should().NotBeNullOrEmpty();
-        }
-
-
-        private TodoContext GetTodoContext()
-        {
-            var options = new DbContextOptionsBuilder<TodoContext>()
-                            .UseInMemoryDatabase(databaseName: "TodoDb")
-                            .Options;
-
-            return new TodoContext(options);
         }
     }
 }
