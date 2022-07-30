@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.TodoItems.Queries.GetTodayTodoItems
 {
-    public class GetTodayTodoItemsQueryHandler : IQueryHandler<TodoItemViewModel>
+    internal sealed class GetTodayTodoItemsQueryHandler : IQueryHandler<TodoItemViewModel>
     {
         private readonly ITodoContext _todoContext;
 

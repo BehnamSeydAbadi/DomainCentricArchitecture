@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.TodoItems.Commands.DoneTodoItem
 {
-    public class DoneTodoItemCommandHandler : ICommandHandler<DoneTodoItemCommand>
+    internal sealed class DoneTodoItemCommandHandler : ICommandHandler<DoneTodoItemCommand>
     {
         private readonly ITodoContext _todoContext;
 

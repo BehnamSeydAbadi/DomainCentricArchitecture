@@ -4,7 +4,7 @@ using Domain.TodoItems;
 
 namespace Application.TodoItems.Commands.CreateTodoItem
 {
-    public class CreateTodoItemCommandHandler : ICommandHandler<CreateTodoItemCommand>
+    internal sealed class CreateTodoItemCommandHandler : ICommandHandler<CreateTodoItemCommand>
     {
         private readonly ITodoContext _todoContext;
 

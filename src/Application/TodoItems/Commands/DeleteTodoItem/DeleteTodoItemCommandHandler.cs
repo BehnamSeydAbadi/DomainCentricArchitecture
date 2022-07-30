@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.TodoItems.Commands.DeleteTodoItem
 {
-    public sealed class DeleteTodoItemCommandHandler : ICommandHandler<DeleteTodoItemCommand>
+    internal sealed class DeleteTodoItemCommandHandler : ICommandHandler<DeleteTodoItemCommand>
     {
         private readonly ITodoContext _todoContext;
 

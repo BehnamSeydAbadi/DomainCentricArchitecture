@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.TodoItems.Commands.UndoneTodoItem
 {
-    public class UndoneTodoItemCommandHandler : ICommandHandler<UndoneTodoItemCommand>
+    internal sealed class UndoneTodoItemCommandHandler : ICommandHandler<UndoneTodoItemCommand>
     {
         private readonly ITodoContext _todoContext;
 
