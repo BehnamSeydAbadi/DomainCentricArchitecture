@@ -12,12 +12,8 @@ namespace Application.UnitTest.TodoItems.Commands
         private ICommandHandler<CreateTodoItemCommand> _commandHandler;
 
         [SetUp]
-        public void Setup()
-        {
-            var s = _serviceScopeFactory.CreateScope().ServiceProvider.GetService(typeof(ICommandHandler<CreateTodoItemCommand>));
-        
-            
-        }
+        public void Setup() => _commandHandler = GetService<ICommandHandler<CreateTodoItemCommand>>();
+
         [Test]
         public async Task CreateTodoItemSuccessfullyAsync()
         {
@@ -28,7 +24,7 @@ namespace Application.UnitTest.TodoItems.Commands
             await _commandHandler.HandleAsync(new CreateTodoItemCommand(todoItemTitle));
 
             //Assert
-            var todoItem = await _todoContext.TodoItems.SingleOrDefaultAsync();
+            var todoItem = await TodoContext.TodoItems.SingleOrDefaultAsync();
             todoItem.Title.Should().Be(todoItemTitle);
         }
     }

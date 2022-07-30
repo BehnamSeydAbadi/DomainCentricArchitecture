@@ -1,17 +1,24 @@
 ﻿using Application.IntegrationTest.Common;
+using Application.Interfaces;
 using Faker;
-using Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.UnitTest.Common
 {
     public abstract class BaseTest
     {
-        protected TodoContext _todoContext;
-        protected IServiceScopeFactory _serviceScopeFactory =
-            new TodoApplicationFactory().Services.GetRequiredService<IServiceScopeFactory>();
-
+        protected ITodoContext TodoContext => GetService<ITodoContext>();
         protected string RandomTodoItemTitle => Name.FullName(NameFormats.WithPrefix);
+
+
+        protected IService GetService<IService>()
+        {
+            var serviceProvider = new TodoApplicationFactory().Services
+                   .GetRequiredService<IServiceScopeFactory>()
+                   .CreateScope()
+                   .ServiceProvider;
+
+            return (IService)serviceProvider.GetService(typeof(IService));
+        }
     }
 }
