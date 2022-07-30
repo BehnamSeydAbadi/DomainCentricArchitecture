@@ -15,7 +15,9 @@ namespace Presentation.TodoItems
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok();
+            var todayTodoItems = await _queryHandler.HandleAsync();
+
+            return Ok(todayTodoItems);
         }
     }
 }
