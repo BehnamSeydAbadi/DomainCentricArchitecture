@@ -1,4 +1,5 @@
-﻿using Infrastructure;
+﻿using Application.Configurations;
+using Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,8 @@ namespace Application.IntegrationTest.Common
 
             builder.ConfigureServices((WebHostBuilderContext builder, IServiceCollection services) =>
             {
+                services.ResolveApplicationServices();
+
                 services.AddDbContext<TodoContext>(
                     (serviceProvider, dbContextOptionsBuilder)
                         => dbContextOptionsBuilder.UseInMemoryDatabase(databaseName: "TodoDb"));

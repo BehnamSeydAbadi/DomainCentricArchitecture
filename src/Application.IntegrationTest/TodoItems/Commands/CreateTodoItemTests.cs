@@ -1,4 +1,5 @@
-﻿using Application.TodoItems.Commands.CreateTodoItem;
+﻿using Application.Common;
+using Application.TodoItems.Commands.CreateTodoItem;
 using Application.UnitTest.Common;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
@@ -8,11 +9,15 @@ namespace Application.UnitTest.TodoItems.Commands
 {
     public class CreateTodoItemTests : BaseTest
     {
-        private CreateTodoItemCommandHandler _commandHandler;
+        private ICommandHandler<CreateTodoItemCommand> _commandHandler;
 
         [SetUp]
-        public void Setup() => _commandHandler = new CreateTodoItemCommandHandler(_todoContext);
-
+        public void Setup()
+        {
+            var s = _serviceScopeFactory.CreateScope().ServiceProvider.GetService(typeof(ICommandHandler<CreateTodoItemCommand>));
+        
+            
+        }
         [Test]
         public async Task CreateTodoItemSuccessfullyAsync()
         {
