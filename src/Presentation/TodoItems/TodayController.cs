@@ -1,4 +1,5 @@
 ﻿using Application.Common;
+using Application.TodoItems.Queries.GetTodayTodoItems;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.TodoItems
@@ -7,14 +8,14 @@ namespace Presentation.TodoItems
     [ApiController]
     public class TodayController : ControllerBase
     {
-        private readonly IQueryHandler<TodoItem> _queryHandler;
+        private readonly IQueryHandler<TodoItemViewModel> _queryHandler;
 
-        public TodayController(IQueryHandler<TodoItem> queryHandler) => _queryHandler = queryHandler;
+        public TodayController(IQueryHandler<TodoItemViewModel> queryHandler) => _queryHandler = queryHandler;
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            
+            return Ok();
         }
     }
 }
