@@ -3,7 +3,7 @@ using Application.Interfaces;
 using Domain.TodoItems;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.TodoItems.Queries
+namespace Application.TodoItems.Queries.GetTodayTodoItems
 {
     public class GetTodayTodoItemsQueryHandler : IQueryHandler<TodoItem>
     {

@@ -1,4 +1,4 @@
-﻿using Application.TodoItems.Queries;
+﻿using Application.TodoItems.Queries.GetTodayTodoItems;
 using Application.UnitTest.Common;
 using Domain.TodoItems;
 using FluentAssertions;
