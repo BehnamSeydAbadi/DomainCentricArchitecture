@@ -7,7 +7,7 @@ namespace Application.UnitTest.Common
 {
     public abstract class BaseTest
     {
-        protected ITodoContext TodoContext => GetService<ITodoContext>();
+        protected ITodoContext GetTodoContext() => GetService<ITodoContext>();
         protected string RandomTodoItemTitle => Name.FullName(NameFormats.WithPrefix);
 
 

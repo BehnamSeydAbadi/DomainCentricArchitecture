@@ -24,7 +24,7 @@ namespace Application.UnitTest.TodoItems.Commands
             await _commandHandler.HandleAsync(new CreateTodoItemCommand(todoItemTitle));
 
             //Assert
-            var todoItem = await TodoContext.TodoItems.SingleOrDefaultAsync();
+            var todoItem = await GetTodoContext().TodoItems.SingleOrDefaultAsync();
             todoItem.Title.Should().Be(todoItemTitle);
         }
     }
