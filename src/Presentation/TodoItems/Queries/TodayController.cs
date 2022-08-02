@@ -3,9 +3,8 @@ using Application.TodoItems.Queries.GetTodayTodoItems;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Common;
 
-namespace Presentation.TodoItems
+namespace Presentation.TodoItems.Queries
 {
-    [ApiController]
     public class TodayController : BaseApiController
     {
         private readonly IQueryHandler<TodoItemViewModel> _queryHandler;
