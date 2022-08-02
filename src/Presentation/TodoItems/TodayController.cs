@@ -1,12 +1,12 @@
 ﻿using Application.Common;
 using Application.TodoItems.Queries.GetTodayTodoItems;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.Common;
 
 namespace Presentation.TodoItems
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class TodayController : ControllerBase
+    public class TodayController : BaseApiController
     {
         private readonly IQueryHandler<TodoItemViewModel> _queryHandler;
 
