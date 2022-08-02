@@ -15,11 +15,6 @@ namespace Infrastructure
 
         public async Task SaveChangesAsync() => await base.SaveChangesAsync();
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer(@"Server=.;Database=TodoDb;Trusted_Connection=True;");
-        //}
-
         public DbSet<TodoItem> TodoItems { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Application.TodoItems.Commands.Common;
+﻿using Application.Common;
+using Application.TodoItems.Commands.Common;
 using Application.TodoItems.Commands.DoneTodoItem;
 using Application.UnitTest.Common;
 using Domain.TodoItems;
@@ -9,35 +10,37 @@ namespace Application.UnitTest.TodoItems.Commands
 {
     public class DoneTodoItemTests : BaseTest
     {
-        //private DoneTodoItemCommandHandler _commandHandler;
+        private ICommandHandler<DoneTodoItemCommand> _commandHandler;
 
-        //[SetUp]
-        //public void Setup() => _commandHandler = new DoneTodoItemCommandHandler(_todoContext);
+        [SetUp]
+        public void Setup() => _commandHandler = GetService<ICommandHandler<DoneTodoItemCommand>>();
 
-        //[Test]
-        //public async Task DoneDateShouldBeCorrectDateOfWhenTodoItemGetsDoneAsync()
-        //{
-        //    //Arange
-        //    var todoItem = new TodoItem(RandomTodoItemTitle);
+        [Test]
+        public async Task DoneDateShouldBeCorrectDateOfWhenTodoItemGetsDoneAsync()
+        {
+            //Arange
+            var todoItem = new TodoItem(RandomTodoItemTitle);
 
-        //    await _todoContext.TodoItems.AddAsync(todoItem);
-        //    await _todoContext.SaveChangesAsync();
+            var todoContext = GetTodoContext();
 
-
-        //    //Act
-        //    await _commandHandler.HandleAsync(new DoneTodoItemCommand(todoItem.Id));
+            await todoContext.TodoItems.AddAsync(todoItem);
+            await todoContext.SaveChangesAsync();
 
 
-        //    //Arange
-        //    todoItem.DoneDate.Should().NotBeNull().And.Be(DateTime.Now.Date);
-        //}
+            //Act
+            await _commandHandler.HandleAsync(new DoneTodoItemCommand(todoItem.Id));
 
-        //[Test]
-        //public async Task ThrowExceptionWhenTodoItemNotFoundAsync()
-        //{
-        //    var action = () => _commandHandler.HandleAsync(new DoneTodoItemCommand(0));
 
-        //    await action.Should().ThrowAsync<TodoItemNotFoundException>();
-        //}
+            //Arange
+            todoItem.DoneDate.Should().NotBeNull().And.Be(DateTime.Now.Date);
+        }
+
+        [Test]
+        public async Task ThrowExceptionWhenTodoItemNotFoundAsync()
+        {
+            var action = () => _commandHandler.HandleAsync(new DoneTodoItemCommand(0));
+
+            await action.Should().ThrowAsync<TodoItemNotFoundException>();
+        }
     }
 }
