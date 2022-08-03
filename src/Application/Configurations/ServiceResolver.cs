@@ -2,6 +2,7 @@
 using Application.TodoItems.Commands.CreateTodoItem;
 using Application.TodoItems.Commands.DeleteTodoItem;
 using Application.TodoItems.Commands.DoneTodoItem;
+using Application.TodoItems.Commands.SetDueDateTodoItem;
 using Application.TodoItems.Commands.UndoneTodoItem;
 using Application.TodoItems.Queries.GetTodayTodoItems;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,7 @@ namespace Application.Configurations
             serviceCollection.AddScoped<ICommandHandler<DeleteTodoItemCommand>, DeleteTodoItemCommandHandler>();
             serviceCollection.AddScoped<ICommandHandler<DoneTodoItemCommand>, DoneTodoItemCommandHandler>();
             serviceCollection.AddScoped<ICommandHandler<UndoneTodoItemCommand>, UndoneTodoItemCommandHandler>();
+            serviceCollection.AddScoped<ICommandHandler<SetDueDateTodoItemCommand>, SetDueDateTodoItemCommandHandler>();
 
             serviceCollection.AddScoped<IQueryHandler<TodoItemViewModel>, GetTodayTodoItemsQueryHandler>();
         }
