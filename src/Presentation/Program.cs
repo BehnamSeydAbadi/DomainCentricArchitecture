@@ -14,7 +14,11 @@ builder.Services
         config.Filters.Add(OutputExceptionFilter.Instance);
         config.Filters.Add(OutputActionFilter.Instance);
     })
-    .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+    .AddNewtonsoftJson(options => 
+    { 
+        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        options.SerializerSettings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
+    });
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

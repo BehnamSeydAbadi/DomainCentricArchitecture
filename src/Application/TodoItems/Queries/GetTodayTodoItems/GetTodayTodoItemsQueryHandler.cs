@@ -13,7 +13,7 @@ namespace Application.TodoItems.Queries.GetTodayTodoItems
         public async Task<TodoItemViewModel[]> HandleAsync()
         {
             return await _todoContext.TodoItems
-                .Where(t => t.DueDate != null && t.DueDate == DateTime.Today.Date)
+                .Where(t => t.DueDate != null && t.DueDate.Value.Date == DateTime.UtcNow.Date)
                 .Select(t => new TodoItemViewModel(t.Title, t.IsDone, t.DoneDate, t.DueDate))
                 .ToArrayAsync();
         }
