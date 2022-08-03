@@ -1,4 +1,4 @@
-﻿namespace Presentation.TodoItems.Commands
+﻿namespace Presentation.TodoItems.Commands.CreateTodoItem
 {
     public sealed class CreateTodoItemDto
     {

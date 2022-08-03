@@ -3,7 +3,7 @@ using Application.TodoItems.Commands.CreateTodoItem;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Common;
 
-namespace Presentation.TodoItems.Commands
+namespace Presentation.TodoItems.Commands.CreateTodoItem
 {
     public class CreateTodoItemController : BaseApiController
     {
