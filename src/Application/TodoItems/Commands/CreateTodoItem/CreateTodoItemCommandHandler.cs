@@ -17,7 +17,7 @@ namespace Application.TodoItems.Commands.CreateTodoItem
             await _todoContext.TodoItems.AddAsync(todoItem);
             await _todoContext.SaveChangesAsync();
 
-            command.TodoId = todoItem.Id;
+            command.Id = todoItem.Id;
         }
     }
 }

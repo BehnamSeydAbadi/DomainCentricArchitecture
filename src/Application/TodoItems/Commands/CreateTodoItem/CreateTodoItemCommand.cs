@@ -7,6 +7,6 @@ namespace Application.TodoItems.Commands.CreateTodoItem
         public CreateTodoItemCommand(string title) => Title = title;
 
         public string Title { get; }
-        public int TodoId { get; internal set; }
+        public int Id { get; internal set; }
     }
 }
