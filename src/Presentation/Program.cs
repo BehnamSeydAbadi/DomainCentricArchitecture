@@ -1,11 +1,19 @@
 using Application.Configurations;
 using Infrastructure.Configurations;
+using Presentation.Filters;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(config => 
+{ 
+    config.Filters.Add(OutputExceptionFilter.Instance);
+    config.Filters.Add(OutputActionFilter.Instance);
+})
+    .AddNewtonsoftJson();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
