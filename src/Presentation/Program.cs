@@ -1,5 +1,6 @@
 using Application.Configurations;
 using Infrastructure.Configurations;
+using Newtonsoft.Json;
 using Presentation.Filters;
 
 
@@ -7,12 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers(config => 
-{ 
-    config.Filters.Add(OutputExceptionFilter.Instance);
-    config.Filters.Add(OutputActionFilter.Instance);
-})
-    .AddNewtonsoftJson();
+builder.Services
+    .AddControllers(config =>
+    {
+        config.Filters.Add(OutputExceptionFilter.Instance);
+        config.Filters.Add(OutputActionFilter.Instance);
+    })
+    .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -6,7 +6,7 @@
         {
             if (data is null && error is null)
                 throw new InvalidOperationException("Output should not be empty of data and error.");
-
+            
             Data = data;
             Error = error;
         }
