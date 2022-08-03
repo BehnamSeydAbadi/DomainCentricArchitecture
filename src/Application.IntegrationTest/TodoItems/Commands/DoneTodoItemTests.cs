@@ -32,7 +32,7 @@ namespace Application.UnitTest.TodoItems.Commands
 
 
             //Arange
-            todoItem.DoneDate.Should().NotBeNull().And.Be(DateTime.Now.Date);
+            todoItem.DoneDate.Should().NotBeNull().And.Be(DateTime.UtcNow.Date);
         }
 
         [Test]
