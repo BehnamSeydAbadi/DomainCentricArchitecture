@@ -1,7 +1,7 @@
 # DomainCentricArchitecture
 <img align="center" width="404" height="404" src="https://i.ibb.co/7CTfWfG/database-centrics-vs-domain-centric-architecture.png" />
 
-This is a sample of domain-based clean architecture. It's created with ASP.NET 6, Entity Framework Core, and the sight of TDD. The project handles simple to-do app businesses with CQRS pattern.
+This is a simple implementation of domain-based clean architecture. It's created with ASP.NET 6, Entity Framework Core, and the sight of TDD. The project handles simple to-do app businesses with CQRS pattern.
 
 <img align="center" width="701" height="330" src="https://i.ibb.co/KNdNBf6/Untitled.jpg" />
 
