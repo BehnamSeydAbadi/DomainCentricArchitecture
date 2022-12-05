@@ -1,25 +1,24 @@
-﻿using Application.Common;
-using Application.TodoItems.Commands.CreateTodoItem;
+﻿using Application.TodoItems.Commands.CreateTodoItem;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Common;
+using MediatR;
 
 namespace Presentation.TodoItems.Commands.CreateTodoItem
 {
     public class CreateTodoItemController : BaseApiController
     {
-        private readonly ICommandHandler<CreateTodoItemCommand> _commandHandler;
+        private readonly ISender _mediator;
 
-        public CreateTodoItemController(ICommandHandler<CreateTodoItemCommand> commandHandler)
-            => _commandHandler = commandHandler;
+        public CreateTodoItemController(ISender mediator) => _mediator = mediator;
 
         [HttpPost]
         public async Task<IActionResult> Post(CreateTodoItemDto dto)
         {
             var command = new CreateTodoItemCommand(dto.Title);
 
-            await _commandHandler.HandleAsync(command);
+            var id = await _mediator.Send(command);
 
-            return Ok(command.Id);
+            return Ok(id);
         }
     }
 }

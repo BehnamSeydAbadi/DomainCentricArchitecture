@@ -1,11 +1,8 @@
 ﻿using Application.Common;
-using Application.TodoItems.Commands.CreateTodoItem;
-using Application.TodoItems.Commands.DeleteTodoItem;
-using Application.TodoItems.Commands.DoneTodoItem;
-using Application.TodoItems.Commands.SetDueDateTodoItem;
-using Application.TodoItems.Commands.UndoneTodoItem;
 using Application.TodoItems.Queries.GetTodayTodoItems;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Application.Configurations
 {
@@ -13,11 +10,7 @@ namespace Application.Configurations
     {
         public static void ResolveApplicationServices(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddScoped<ICommandHandler<CreateTodoItemCommand>, CreateTodoItemCommandHandler>();
-            serviceCollection.AddScoped<ICommandHandler<DeleteTodoItemCommand>, DeleteTodoItemCommandHandler>();
-            serviceCollection.AddScoped<ICommandHandler<DoneTodoItemCommand>, DoneTodoItemCommandHandler>();
-            serviceCollection.AddScoped<ICommandHandler<UndoneTodoItemCommand>, UndoneTodoItemCommandHandler>();
-            serviceCollection.AddScoped<ICommandHandler<SetDueDateTodoItemCommand>, SetDueDateTodoItemCommandHandler>();
+            serviceCollection.AddMediatR(Assembly.GetExecutingAssembly());
 
             serviceCollection.AddScoped<IQueryHandler<TodoItemViewModel>, GetTodayTodoItemsQueryHandler>();
         }

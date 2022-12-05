@@ -1,18 +1,18 @@
-﻿using Application.Common;
-using Application.TodoItems.Commands.CreateTodoItem;
+﻿using Application.TodoItems.Commands.CreateTodoItem;
+using Microsoft.EntityFrameworkCore;
 using Application.UnitTest.Common;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
+using MediatR;
 
 namespace Application.UnitTest.TodoItems.Commands
 {
     public class CreateTodoItemTests : BaseTest
     {
-        private ICommandHandler<CreateTodoItemCommand> _commandHandler;
+        private ISender _mediator;
 
         [SetUp]
-        public void Setup() => _commandHandler = GetService<ICommandHandler<CreateTodoItemCommand>>();
+        public void Setup() => _mediator = GetService<ISender>();
 
         [Test]
         public async Task CreateTodoItemSuccessfullyAsync()
@@ -21,7 +21,7 @@ namespace Application.UnitTest.TodoItems.Commands
             var todoItemTitle = RandomTodoItemTitle;
 
             //Act
-            await _commandHandler.HandleAsync(new CreateTodoItemCommand(todoItemTitle));
+            await _mediator.Send(new CreateTodoItemCommand(todoItemTitle));
 
             //Assert
             var todoItem = await GetTodoContext().TodoItems.SingleOrDefaultAsync();
