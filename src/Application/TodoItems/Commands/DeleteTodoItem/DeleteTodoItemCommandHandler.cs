@@ -1,19 +1,19 @@
-﻿using Application.Common;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Application.TodoItems.Commands.Common;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.TodoItems.Commands.DeleteTodoItem
 {
-    internal sealed class DeleteTodoItemCommandHandler : ICommandHandler<DeleteTodoItemCommand>
+    internal sealed class DeleteTodoItemCommandHandler : IRequestHandler<DeleteTodoItemCommand>
     {
         private readonly ITodoContext _todoContext;
 
         public DeleteTodoItemCommandHandler(ITodoContext todoContext) => _todoContext = todoContext;
 
-        public async Task HandleAsync(DeleteTodoItemCommand command)
+        public async Task<Unit> Handle(DeleteTodoItemCommand request, CancellationToken cancellationToken)
         {
-            var todoItem = await _todoContext.TodoItems.SingleOrDefaultAsync(t => t.Id == command.Id);
+            var todoItem = await _todoContext.TodoItems.SingleOrDefaultAsync(t => t.Id == request.Id);
 
             if (todoItem == null)
                 throw new TodoItemNotFoundException();
@@ -22,6 +22,8 @@ namespace Application.TodoItems.Commands.DeleteTodoItem
             _todoContext.TodoItems.Remove(todoItem);
 
             await _todoContext.SaveChangesAsync();
+
+            return Unit.Value;
         }
     }
 }

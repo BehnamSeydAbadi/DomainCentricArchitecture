@@ -1,20 +1,20 @@
-﻿using Application.Common;
-using Application.TodoItems.Commands.Common;
+﻿using Application.TodoItems.Commands.Common;
 using Application.TodoItems.Commands.DeleteTodoItem;
+using Microsoft.EntityFrameworkCore;
 using Application.UnitTest.Common;
 using Domain.TodoItems;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
+using MediatR;
 
 namespace Application.UnitTest.TodoItems.Commands
 {
     public class DeleteTodoItemTests : BaseTest
     {
-        private ICommandHandler<DeleteTodoItemCommand> _commandHandler;
+        private ISender _mediator;
 
         [SetUp]
-        public void Setup() => _commandHandler = GetService<ICommandHandler<DeleteTodoItemCommand>>();
+        public void Setup() => _mediator = GetService<ISender>();
 
         [Test]
         public async Task DeleteTodoItemSuccessfullyAsync()
@@ -29,7 +29,7 @@ namespace Application.UnitTest.TodoItems.Commands
 
 
             //Act
-            await _commandHandler.HandleAsync(new DeleteTodoItemCommand(todoItem.Id));
+            await _mediator.Send(new DeleteTodoItemCommand(todoItem.Id));
 
 
             //Assert
@@ -40,10 +40,9 @@ namespace Application.UnitTest.TodoItems.Commands
         [Test]
         public async Task ThrowExceptionWhenTodoItemNotFoundAsync()
         {
-            var action = () => _commandHandler.HandleAsync(new DeleteTodoItemCommand(0));
+            var action = () => _mediator.Send(new DeleteTodoItemCommand(0));
 
             await action.Should().ThrowAsync<TodoItemNotFoundException>();
         }
-
     }
 }

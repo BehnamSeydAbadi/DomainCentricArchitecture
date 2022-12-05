@@ -1,21 +1,20 @@
-﻿using Application.Common;
-using Application.TodoItems.Commands.DeleteTodoItem;
+﻿using Application.TodoItems.Commands.DeleteTodoItem;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Common;
+using MediatR;
 
 namespace Presentation.TodoItems.Commands.DeleteTodoItem
 {
     public class DeleteTodoItemController : BaseApiController
     {
-        private readonly ICommandHandler<DeleteTodoItemCommand> _commandHandler;
+        private readonly ISender _mediator;
 
-        public DeleteTodoItemController(ICommandHandler<DeleteTodoItemCommand> commandHandler)
-            => _commandHandler = commandHandler;
+        public DeleteTodoItemController(ISender mediator) => _mediator = mediator;
 
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
-            await _commandHandler.HandleAsync(new DeleteTodoItemCommand(id));
+            await _mediator.Send(new DeleteTodoItemCommand(id));
 
             return Ok();
         }

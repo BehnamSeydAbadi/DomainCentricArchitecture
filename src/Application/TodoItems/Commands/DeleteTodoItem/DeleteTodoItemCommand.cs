@@ -1,8 +1,8 @@
-﻿using Application.Common;
+﻿using MediatR;
 
 namespace Application.TodoItems.Commands.DeleteTodoItem
 {
-    public class DeleteTodoItemCommand : ICommand
+    public class DeleteTodoItemCommand : IRequest
     {
         public DeleteTodoItemCommand(int id) => Id = id;
 
