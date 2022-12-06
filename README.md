@@ -17,3 +17,4 @@ List of used technologies:
 * [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
 * [NUnit](https://nunit.org/)
 * [FluentAssertions](https://fluentassertions.com/)
+* [MediatR](https://github.com/jbogard/MediatR)
