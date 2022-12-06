@@ -1,20 +1,20 @@
-﻿using Application.Common;
-using Application.TodoItems.Queries.GetTodayTodoItems;
+﻿using Application.TodoItems.Queries.GetTodayTodoItems;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Common;
+using MediatR;
 
 namespace Presentation.TodoItems.Queries
 {
     public class TodayController : BaseApiController
     {
-        private readonly IQueryHandler<TodoItemViewModel> _queryHandler;
+        private readonly ISender _mediator;
 
-        public TodayController(IQueryHandler<TodoItemViewModel> queryHandler) => _queryHandler = queryHandler;
+        public TodayController(ISender mediator) => _mediator = mediator;
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var todayTodoItems = await _queryHandler.HandleAsync();
+            var todayTodoItems = await _mediator.Send(GetTodayTodoItemsQuery.Default);
 
             return Ok(todayTodoItems);
         }

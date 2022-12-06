@@ -3,31 +3,34 @@ using Application.UnitTest.Common;
 using Domain.TodoItems;
 using FluentAssertions;
 using NUnit.Framework;
+using MediatR;
 
 namespace Application.UnitTest.TodoItems.Queries
 {
     public class GetTodayTodoItemsTests : BaseTest
     {
-        //private GetTodayTodoItemsQueryHandler _queryHandler;
+        private ISender _mediator;
 
-        //[SetUp]
-        //public void Setup() => _queryHandler = new GetTodayTodoItemsQueryHandler(_todoContext);
+        [SetUp]
+        public void Setup() => _mediator = GetService<ISender>();
 
-        //[Test]
-        //public async Task GetTodayTodoItemsSuccessfullyAsync()
-        //{
-        //    //Arange
-        //    var todoyTodoItem = new TodoItem(RandomTodoItemTitle);
-        //    todoyTodoItem.SetDueDate(DateTime.Today.Date);
+        [Test]
+        public async Task GetTodayTodoItemsSuccessfullyAsync()
+        {
+            //Arange
+            var todoyTodoItem = new TodoItem(RandomTodoItemTitle);
+            todoyTodoItem.SetDueDate(DateTime.Today.Date);
 
-        //    await _todoContext.TodoItems.AddAsync(todoyTodoItem);
-        //    await _todoContext.SaveChangesAsync();
+            var todoContext = GetTodoContext();
 
-        //    //Act
-        //    var todayTodoItems = await _queryHandler.HandleAsync();
+            await todoContext.TodoItems.AddAsync(todoyTodoItem);
+            await todoContext.SaveChangesAsync();
 
-        //    //Assert
-        //    todayTodoItems.Should().NotBeNullOrEmpty();
-        //}
+            //Act
+            var todayTodoItems = await _mediator.Send(GetTodayTodoItemsQuery.Default);
+
+            //Assert
+            todayTodoItems.Should().NotBeNullOrEmpty();
+        }
     }
 }
