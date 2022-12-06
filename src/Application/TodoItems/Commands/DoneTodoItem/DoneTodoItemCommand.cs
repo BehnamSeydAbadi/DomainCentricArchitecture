@@ -1,8 +1,8 @@
-﻿using Application.Common;
+﻿using MediatR;
 
 namespace Application.TodoItems.Commands.DoneTodoItem
 {
-    public sealed class DoneTodoItemCommand : ICommand
+    public sealed class DoneTodoItemCommand : IRequest
     {
         public DoneTodoItemCommand(int id) => Id = id;
 

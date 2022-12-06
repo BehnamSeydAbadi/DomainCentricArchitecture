@@ -1,19 +1,19 @@
-﻿using Application.Common;
-using Application.TodoItems.Commands.Common;
+﻿using Application.TodoItems.Commands.Common;
 using Application.TodoItems.Commands.DoneTodoItem;
 using Application.UnitTest.Common;
 using Domain.TodoItems;
 using FluentAssertions;
+using MediatR;
 using NUnit.Framework;
 
 namespace Application.UnitTest.TodoItems.Commands
 {
     public class DoneTodoItemTests : BaseTest
     {
-        private ICommandHandler<DoneTodoItemCommand> _commandHandler;
+        private ISender _mediator;
 
         [SetUp]
-        public void Setup() => _commandHandler = GetService<ICommandHandler<DoneTodoItemCommand>>();
+        public void Setup() => _mediator = GetService<ISender>();
 
         [Test]
         public async Task DoneDateShouldBeCorrectDateOfWhenTodoItemGetsDoneAsync()
@@ -28,7 +28,7 @@ namespace Application.UnitTest.TodoItems.Commands
 
 
             //Act
-            await _commandHandler.HandleAsync(new DoneTodoItemCommand(todoItem.Id));
+            await _mediator.Send(new DoneTodoItemCommand(todoItem.Id));
 
 
             //Arange
@@ -38,7 +38,7 @@ namespace Application.UnitTest.TodoItems.Commands
         [Test]
         public async Task ThrowExceptionWhenTodoItemNotFoundAsync()
         {
-            var action = () => _commandHandler.HandleAsync(new DoneTodoItemCommand(0));
+            var action = () => _mediator.Send(new DoneTodoItemCommand(0));
 
             await action.Should().ThrowAsync<TodoItemNotFoundException>();
         }

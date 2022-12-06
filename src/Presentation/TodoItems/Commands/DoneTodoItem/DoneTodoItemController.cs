@@ -1,5 +1,5 @@
-﻿using Application.Common;
-using Application.TodoItems.Commands.DoneTodoItem;
+﻿using Application.TodoItems.Commands.DoneTodoItem;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Common;
 
@@ -7,15 +7,14 @@ namespace Presentation.TodoItems.Commands.DoneTodoItem
 {
     public class DoneTodoItemController : BaseApiController
     {
-        private readonly ICommandHandler<DoneTodoItemCommand> _commandHandler;
+        private readonly ISender _mediator;
 
-        public DoneTodoItemController(ICommandHandler<DoneTodoItemCommand> commandHandler)
-            => _commandHandler = commandHandler;
+        public DoneTodoItemController(ISender mediator) => _mediator = mediator;
 
         [HttpPut]
         public async Task<IActionResult> Put(int id)
         {
-            await _commandHandler.HandleAsync(new DoneTodoItemCommand(id));
+            await _mediator.Send(new DoneTodoItemCommand(id));
 
             return Ok();
         }

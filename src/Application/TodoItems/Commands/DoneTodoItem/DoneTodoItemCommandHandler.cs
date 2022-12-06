@@ -1,20 +1,19 @@
-﻿using Application.Common;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Application.TodoItems.Commands.Common;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.TodoItems.Commands.DoneTodoItem
 {
-    internal sealed class DoneTodoItemCommandHandler : ICommandHandler<DoneTodoItemCommand>
+    internal sealed class DoneTodoItemCommandHandler : IRequestHandler<DoneTodoItemCommand>
     {
         private readonly ITodoContext _todoContext;
 
         public DoneTodoItemCommandHandler(ITodoContext todoContext) => _todoContext = todoContext;
 
-        public async Task HandleAsync(DoneTodoItemCommand command)
+        public async Task<Unit> Handle(DoneTodoItemCommand request, CancellationToken cancellationToken)
         {
-            var todoItem = await _todoContext.TodoItems
-                .SingleOrDefaultAsync(t => t.Id == command.Id);
+            var todoItem = await _todoContext.TodoItems.SingleOrDefaultAsync(t => t.Id == request.Id);
 
             if (todoItem == null)
                 throw new TodoItemNotFoundException();
@@ -25,6 +24,8 @@ namespace Application.TodoItems.Commands.DoneTodoItem
             _todoContext.TodoItems.Update(todoItem);
 
             await _todoContext.SaveChangesAsync();
+
+            return Unit.Value;
         }
     }
 }
