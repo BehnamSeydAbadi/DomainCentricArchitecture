@@ -1,8 +1,8 @@
-﻿using Application.Common;
+﻿using MediatR;
 
 namespace Application.TodoItems.Commands.SetDueDateTodoItem
 {
-    public class SetDueDateTodoItemCommand : ICommand
+    public class SetDueDateTodoItemCommand : IRequest
     {
         public SetDueDateTodoItemCommand(int id, DateTime dueDate)
         {

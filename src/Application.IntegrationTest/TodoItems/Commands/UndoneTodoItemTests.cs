@@ -1,43 +1,46 @@
-﻿using Application.TodoItems.Commands.Common;
-using Application.TodoItems.Commands.UndoneTodoItem;
+﻿using Application.TodoItems.Commands.UndoneTodoItem;
+using Application.TodoItems.Commands.Common;
 using Application.UnitTest.Common;
 using Domain.TodoItems;
 using FluentAssertions;
 using NUnit.Framework;
+using MediatR;
 
 namespace Application.UnitTest.TodoItems.Commands
 {
     public class UndoneTodoItemTests : BaseTest
     {
-        //private UndoneTodoItemCommandHandler _commandHandler;
+        private ISender _mediator;
 
-        //[SetUp]
-        //public void Setup() => _commandHandler = new UndoneTodoItemCommandHandler(_todoContext);
+        [SetUp]
+        public void Setup() => _mediator = GetService<ISender>();
 
-        //[Test]
-        //public async Task DoneDateShouldBeNullWhenTodoItemGetsUndoneAsync()
-        //{
-        //    //Arange
-        //    var todoItem = new TodoItem(RandomTodoItemTitle);
+        [Test]
+        public async Task DoneDateShouldBeNullWhenTodoItemGetsUndoneAsync()
+        {
+            //Arange
+            var todoItem = new TodoItem(RandomTodoItemTitle);
 
-        //    await _todoContext.TodoItems.AddAsync(todoItem);
-        //    await _todoContext.SaveChangesAsync();
+            var todoContext = GetTodoContext();
 
-
-        //    //Act
-        //    await _commandHandler.HandleAsync(new UndoneTodoItemCommand(todoItem.Id));
+            await todoContext.TodoItems.AddAsync(todoItem);
+            await todoContext.SaveChangesAsync();
 
 
-        //    //Arange
-        //    todoItem.DoneDate.Should().BeNull();
-        //}
+            //Act
+            await _mediator.Send(new UndoneTodoItemCommand(todoItem.Id));
 
-        //[Test]
-        //public async Task ThrowExceptionWhenTodoItemNotFoundAsync()
-        //{
-        //    var action = () => _commandHandler.HandleAsync(new UndoneTodoItemCommand(0));
 
-        //    await action.Should().ThrowAsync<TodoItemNotFoundException>();
-        //}
+            //Arange
+            todoItem.DoneDate.Should().BeNull();
+        }
+
+        [Test]
+        public async Task ThrowExceptionWhenTodoItemNotFoundAsync()
+        {
+            var action = () => _mediator.Send(new UndoneTodoItemCommand(0));
+
+            await action.Should().ThrowAsync<TodoItemNotFoundException>();
+        }
     }
 }

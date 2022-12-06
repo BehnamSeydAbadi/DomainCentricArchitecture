@@ -1,18 +1,18 @@
-﻿using Application.Common;
-using Application.TodoItems.Commands.SetDueDateTodoItem;
+﻿using Application.TodoItems.Commands.SetDueDateTodoItem;
 using Application.UnitTest.Common;
 using Domain.TodoItems;
 using FluentAssertions;
 using NUnit.Framework;
+using MediatR;
 
 namespace Application.IntegrationTest.TodoItems.Commands
 {
     public class SetDueDateTodoItemTests : BaseTest
     {
-        private ICommandHandler<SetDueDateTodoItemCommand> _commandHandler;
+        private ISender _mediator;
 
         [SetUp]
-        public void Setup() => _commandHandler = GetService<ICommandHandler<SetDueDateTodoItemCommand>>();
+        public void Setup() => _mediator = GetService<ISender>();
 
         [Test]
         public async Task DueDateShouldBeCorrectDateOfWhenTodoItemDueDateIsSetAsync()
@@ -28,7 +28,7 @@ namespace Application.IntegrationTest.TodoItems.Commands
             var dueDate = DateTime.UtcNow.Date;
 
             //Act
-            await _commandHandler.HandleAsync(new SetDueDateTodoItemCommand(todoItem.Id, dueDate));
+            await _mediator.Send(new SetDueDateTodoItemCommand(todoItem.Id, dueDate));
 
 
             //Arange

@@ -1,8 +1,8 @@
-﻿using Application.Common;
+﻿using MediatR;
 
 namespace Application.TodoItems.Commands.UndoneTodoItem
 {
-    public sealed class UndoneTodoItemCommand : ICommand
+    public sealed class UndoneTodoItemCommand : IRequest
     {
         public UndoneTodoItemCommand(int id) => Id = id;
 

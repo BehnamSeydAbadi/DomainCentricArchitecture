@@ -1,30 +1,32 @@
-﻿using Application.Common;
-using Application.Interfaces;
-using Application.TodoItems.Commands.Common;
+﻿using Application.TodoItems.Commands.Common;
 using Microsoft.EntityFrameworkCore;
+using Application.Interfaces;
+using MediatR;
 
 namespace Application.TodoItems.Commands.SetDueDateTodoItem
 {
-    internal class SetDueDateTodoItemCommandHandler : ICommandHandler<SetDueDateTodoItemCommand>
+    internal class SetDueDateTodoItemCommandHandler : IRequestHandler<SetDueDateTodoItemCommand>
     {
         private readonly ITodoContext _todoContext;
 
         public SetDueDateTodoItemCommandHandler(ITodoContext todoContext) => _todoContext = todoContext;
 
-        public async Task HandleAsync(SetDueDateTodoItemCommand command)
+        public async Task<Unit> Handle(SetDueDateTodoItemCommand request, CancellationToken cancellationToken)
         {
             var todoItem = await _todoContext.TodoItems
-                .SingleOrDefaultAsync(t => t.Id == command.Id);
+                .SingleOrDefaultAsync(t => t.Id == request.Id);
 
             if (todoItem == null)
                 throw new TodoItemNotFoundException();
 
 
-            todoItem.SetDueDate(command.DueDate);
+            todoItem.SetDueDate(request.DueDate);
 
             _todoContext.TodoItems.Update(todoItem);
 
             await _todoContext.SaveChangesAsync();
+
+            return Unit.Value;
         }
     }
 }

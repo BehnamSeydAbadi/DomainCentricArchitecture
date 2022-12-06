@@ -1,21 +1,20 @@
-﻿using Application.Common;
-using Application.TodoItems.Commands.SetDueDateTodoItem;
+﻿using Application.TodoItems.Commands.SetDueDateTodoItem;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Common;
+using MediatR;
 
 namespace Presentation.TodoItems.Commands.SetDueDateTodoItem
 {
     public class SetDueDateTodoItemController : BaseApiController
     {
-        private readonly ICommandHandler<SetDueDateTodoItemCommand> _commandHandler;
+        private readonly ISender _mediator;
 
-        public SetDueDateTodoItemController(ICommandHandler<SetDueDateTodoItemCommand> commandHandler)
-            => _commandHandler = commandHandler;
+        public SetDueDateTodoItemController(ISender mediator) => _mediator = mediator;
 
         [HttpPut]
         public async Task<IActionResult> Put(DueDateDto dto)
         {
-            await _commandHandler.HandleAsync(new SetDueDateTodoItemCommand(dto.Id, dto.DueDate));
+            await _mediator.Send(new SetDueDateTodoItemCommand(dto.Id, dto.DueDate));
 
             return Ok();
         }
