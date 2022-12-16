@@ -1,11 +1,11 @@
-﻿using Application.TodoItems.Commands.Common;
-using Application.TodoItems.Commands.DeleteTodoItem;
+﻿using Application.TodoItems.Commands.DeleteTodoItem;
 using Microsoft.EntityFrameworkCore;
 using Application.UnitTest.Common;
 using Domain.TodoItems;
 using FluentAssertions;
 using NUnit.Framework;
 using MediatR;
+using FluentValidation;
 
 namespace Application.UnitTest.TodoItems.Commands
 {
@@ -38,11 +38,12 @@ namespace Application.UnitTest.TodoItems.Commands
         }
 
         [Test]
-        public async Task ThrowExceptionWhenTodoItemNotFoundAsync()
+        public void ThrowExceptionWhenTodoItemNotFound()
         {
-            var action = () => _mediator.Send(new DeleteTodoItemCommand(0));
+            var command = new DeleteTodoItemCommand(0);
+            var action = () => _mediator.Send(command);
 
-            await action.Should().ThrowAsync<TodoItemNotFoundException>();
+            FluentActions.Invoking(action).Should().ThrowAsync<ValidationException>();
         }
     }
 }

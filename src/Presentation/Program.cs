@@ -1,21 +1,22 @@
 using Application.Configurations;
+using FluentValidation.AspNetCore;
 using Infrastructure.Configurations;
 using Newtonsoft.Json;
 using Presentation.Filters;
-
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services
-    .AddControllers(config =>
+    .AddControllers(options =>
     {
-        config.Filters.Add(OutputExceptionFilter.Instance);
-        config.Filters.Add(OutputActionFilter.Instance);
+        options.Filters.Add(OutputExceptionFilter.Instance);
+        options.Filters.Add(OutputActionFilter.Instance);
     })
-    .AddNewtonsoftJson(options => 
-    { 
+    .AddNewtonsoftJson(options =>
+    {
         options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
         options.SerializerSettings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
     });

@@ -1,5 +1,4 @@
 ﻿using Application.Interfaces;
-using Application.TodoItems.Commands.Common;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,10 +13,6 @@ namespace Application.TodoItems.Commands.DeleteTodoItem
         public async Task<Unit> Handle(DeleteTodoItemCommand request, CancellationToken cancellationToken)
         {
             var todoItem = await _todoContext.TodoItems.SingleOrDefaultAsync(t => t.Id == request.Id);
-
-            if (todoItem == null)
-                throw new TodoItemNotFoundException();
-
 
             _todoContext.TodoItems.Remove(todoItem);
 
