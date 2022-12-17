@@ -1,10 +1,10 @@
 ﻿using Application.TodoItems.Commands.UndoneTodoItem;
-using Application.TodoItems.Commands.Common;
 using Application.UnitTest.Common;
 using Domain.TodoItems;
 using FluentAssertions;
 using NUnit.Framework;
 using MediatR;
+using FluentValidation;
 
 namespace Application.UnitTest.TodoItems.Commands
 {
@@ -40,7 +40,7 @@ namespace Application.UnitTest.TodoItems.Commands
         {
             var action = () => _mediator.Send(new UndoneTodoItemCommand(0));
 
-            await action.Should().ThrowAsync<TodoItemNotFoundException>();
+            await action.Should().ThrowAsync<ValidationException>();
         }
     }
 }
