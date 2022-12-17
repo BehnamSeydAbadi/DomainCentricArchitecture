@@ -3,6 +3,7 @@ using Application.TodoItems.Commands.DoneTodoItem;
 using Application.UnitTest.Common;
 using Domain.TodoItems;
 using FluentAssertions;
+using FluentValidation;
 using MediatR;
 using NUnit.Framework;
 
@@ -40,7 +41,7 @@ namespace Application.UnitTest.TodoItems.Commands
         {
             var action = () => _mediator.Send(new DoneTodoItemCommand(0));
 
-            await action.Should().ThrowAsync<TodoItemNotFoundException>();
+            await action.Should().ThrowAsync<ValidationException>();
         }
     }
 }

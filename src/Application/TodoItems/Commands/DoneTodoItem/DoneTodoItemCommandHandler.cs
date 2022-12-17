@@ -15,10 +15,6 @@ namespace Application.TodoItems.Commands.DoneTodoItem
         {
             var todoItem = await _todoContext.TodoItems.SingleOrDefaultAsync(t => t.Id == request.Id);
 
-            if (todoItem == null)
-                throw new TodoItemNotFoundException();
-
-
             todoItem.MakeItDone();
 
             _todoContext.TodoItems.Update(todoItem);
