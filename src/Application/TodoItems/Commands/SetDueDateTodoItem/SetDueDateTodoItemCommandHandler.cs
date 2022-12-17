@@ -1,5 +1,4 @@
-﻿using Application.TodoItems.Commands.Common;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Application.Interfaces;
 using MediatR;
 
@@ -15,10 +14,6 @@ namespace Application.TodoItems.Commands.SetDueDateTodoItem
         {
             var todoItem = await _todoContext.TodoItems
                 .SingleOrDefaultAsync(t => t.Id == request.Id);
-
-            if (todoItem == null)
-                throw new TodoItemNotFoundException();
-
 
             todoItem.SetDueDate(request.DueDate);
 

@@ -4,6 +4,7 @@ using Domain.TodoItems;
 using FluentAssertions;
 using NUnit.Framework;
 using MediatR;
+using FluentValidation;
 
 namespace Application.IntegrationTest.TodoItems.Commands
 {
@@ -33,6 +34,14 @@ namespace Application.IntegrationTest.TodoItems.Commands
 
             //Arange
             todoItem.DueDate.Should().NotBeNull().And.Be(dueDate);
+        }
+
+        [Test]
+        public async Task ThrowExceptionWhenTodoItemNotFoundAsync()
+        {
+            var action = () => _mediator.Send(new SetDueDateTodoItemCommand(0, DateTime.Now));
+
+            await action.Should().ThrowAsync<ValidationException>();
         }
     }
 }
