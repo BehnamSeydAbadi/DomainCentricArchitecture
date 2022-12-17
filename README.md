@@ -18,3 +18,4 @@ List of used technologies:
 * [NUnit](https://nunit.org/)
 * [FluentAssertions](https://fluentassertions.com/)
 * [MediatR](https://github.com/jbogard/MediatR)
+* [FluentValidation](https://github.com/FluentValidation/FluentValidation)
