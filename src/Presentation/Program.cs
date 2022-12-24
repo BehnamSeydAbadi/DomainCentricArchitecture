@@ -1,9 +1,8 @@
 using Application.Configurations;
-using FluentValidation.AspNetCore;
 using Infrastructure.Configurations;
 using Newtonsoft.Json;
 using Presentation.Filters;
-using System.Reflection;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +25,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.ResolveInfrastructureServices(builder.Configuration.GetConnectionString("DefaultConnection"));
 builder.Services.ResolveApplicationServices();
+
+var logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+builder.Logging.AddSerilog(logger);
 
 var app = builder.Build();
 

@@ -20,7 +20,7 @@ namespace Presentation.Filters
 
             if (typeof(IException).IsAssignableFrom(exception.GetType()))
                 statusCode = (int)HttpStatusCode.BadRequest;
-
+            
             var output = Output.Create(
                             Error.Create(
                                 exception.Message,
